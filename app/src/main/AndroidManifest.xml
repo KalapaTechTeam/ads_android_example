@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- INTERNET and the SDK's mini-app activity are merged in from `ads-ui-view`: declare nothing for them. -->
+    <!-- Asked at runtime on Android 13+; only the sample's own notification needs it. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".SampleApplication"
         android:allowBackup="false"
@@ -17,11 +20,16 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".notification.NotificationReceiver"
+            android:exported="false" />
     </application>
 </manifest>

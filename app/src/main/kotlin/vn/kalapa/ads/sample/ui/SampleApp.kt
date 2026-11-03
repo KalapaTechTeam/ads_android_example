@@ -36,7 +36,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.withResumed
 import androidx.lifecycle.viewmodel.compose.viewModel
 import vn.kalapa.ads.sample.R
 import vn.kalapa.ads.sample.ads.AdsViewModel
@@ -65,6 +67,15 @@ internal fun SampleApp(viewModel: AdsViewModel = viewModel()) {
     val unread by viewModel.unreadEvents.collectAsStateWithLifecycle()
 
     LaunchedEffect(tab, events.firstOrNull()?.id) { if (tab == Tab.EVENTS) viewModel.markEventsSeen() }
+
+    // A notification tap waits for the session and for a resumed Activity, which the SDK presents the mini-app from.
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    LaunchedEffect(state.session, state.pendingOpen) {
+        if (state.session != null && state.pendingOpen != null) {
+            lifecycle.withResumed { }
+            viewModel.openPending()
+        }
+    }
     val badge = if (tab == Tab.EVENTS) 0 else unread
 
     BackHandler(enabled = tab != Tab.FEED) { tab = Tab.FEED }

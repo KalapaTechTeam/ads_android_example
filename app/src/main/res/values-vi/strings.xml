@@ -17,6 +17,12 @@
     <string name="settings_unsupported">Phiên bản Android này không đặt được ngôn ngữ riêng cho từng ứng dụng; ứng dụng theo ngôn ngữ thiết bị.</string>
     <string name="mini_app_open">Mở mini-app</string>
     <string name="mini_app_open_production">Mở mini-app (production)</string>
+    <string name="mini_app_notify">Báo tôi sau 5 giây</string>
+    <string name="notification_channel">Mini-app</string>
+    <string name="notification_title">Kalapa Ads</string>
+    <string name="notification_body">Bấm để mở mini-app</string>
+    <string name="notification_scheduled">Thông báo đến sau 5 giây. Hãy thoát app rồi bấm vào nó.</string>
+    <string name="notification_denied">Thông báo của app đang tắt.</string>
     <string name="mini_app_production_switch">URL mặc định (production)</string>
     <string name="mini_app_production_warning">Tắt: mở UAT. Bật: mở production, có thể tạo lead thật.</string>
     <string name="tab_events">Sự kiện SDK</string>

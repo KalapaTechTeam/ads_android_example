@@ -3,6 +3,7 @@ package vn.kalapa.ads.sample.ads
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +28,18 @@ internal data class SampleUiState(
     val scenario: Scenario = Scenario.BANNER,
     val session: AdsSession? = null,
     val slots: Map<String, AdController> = emptyMap(),
+    val pendingOpen: PendingMiniApp? = null,
 )
+
+private const val NOTIFICATION_ENTRY = "notification"
+
+/** The SDK's `MINIAPP_ALREADY_OPEN` error code (3004). */
+private const val ALREADY_OPEN_CODE = 3004
+private const val MAX_ALREADY_OPEN_RETRIES = 5
+private const val ALREADY_OPEN_RETRY_MS = 300L
+
+/** A mini-app a notification tap asked for and that is still waiting to open. A null [url] is the default URL. */
+internal data class PendingMiniApp(val url: String?)
 
 /**
  * Owns the SDK session and the ad controllers, so a configuration change neither restarts the session nor reloads
@@ -110,11 +122,36 @@ internal class AdsViewModel(private val application: Application) : AndroidViewM
      * Activity scope: the mini-app screen outlives the Activity that asked for it. A null [url] opens the default
      * production URL. The URL is not logged: the SDK adds the profile's identity fields to it.
      */
-    fun openMiniApp(url: String?) {
+    fun openMiniApp(url: String?) = launchMiniApp(url, entry = if (url == null) "default_url" else "uat_url")
+
+    /**
+     * A notification tap asked for a mini-app. A cold start has no session yet and no resumed Activity, which the
+     * SDK needs to present the screen, so the request waits in the state until [openPending] runs.
+     */
+    fun openFromNotification(url: String?) = mutableState.update { it.copy(pendingOpen = PendingMiniApp(url)) }
+
+    /** Opens what [openFromNotification] kept, once. The caller waits for the session and a resumed Activity. */
+    fun openPending() {
+        val pending = state.value.pendingOpen ?: return
+        if (state.value.session == null) return
+        mutableState.update { it.copy(pendingOpen = null) }
+        launchMiniApp(pending.url, entry = NOTIFICATION_ENTRY)
+    }
+
+    private fun launchMiniApp(url: String?, entry: String) {
         val current = state.value.session ?: return
         viewModelScope.launch {
-            val entry = if (url == null) "default_url" else "uat_url"
-            when (val result = current.openMiniApp(url)) {
+            var opened = current.openMiniApp(url)
+            // A tap while a mini-app is open finishes that screen (the notification Intent uses CLEAR_TOP), and it is
+            // still closing when this call starts: the SDK allows one mini-app at a time, so wait for it to go.
+            var retries = 0
+            while (entry == NOTIFICATION_ENTRY && (opened as? SdkResult.Failure)?.error?.code == ALREADY_OPEN_CODE &&
+                retries++ < MAX_ALREADY_OPEN_RETRIES
+            ) {
+                delay(ALREADY_OPEN_RETRY_MS)
+                opened = current.openMiniApp(url)
+            }
+            when (val result = opened) {
                 is SdkResult.Success -> eventLog.onEvent(
                     "mini_app_outcome",
                     buildMap {

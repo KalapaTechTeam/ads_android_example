@@ -19,6 +19,12 @@
     <string name="language_english" translatable="false">English</string>
     <string name="mini_app_open">Open mini-app</string>
     <string name="mini_app_open_production">Open mini-app (production)</string>
+    <string name="mini_app_notify">Notify me in 5 s</string>
+    <string name="notification_channel">Mini-app</string>
+    <string name="notification_title">Kalapa Ads</string>
+    <string name="notification_body">Tap to open the mini-app</string>
+    <string name="notification_scheduled">Notification in 5 s. Leave the app, then tap it.</string>
+    <string name="notification_denied">Notifications are off for this app.</string>
     <string name="mini_app_production_switch">Default URL (production)</string>
     <string name="mini_app_production_warning">Off opens UAT. On opens production, which may create real leads.</string>
     <string name="tab_events">SDK events</string>
