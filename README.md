@@ -50,6 +50,28 @@ unless chosen, because it may create real leads.
 Replace the two ad unit ids in `ads/FeedSlots.kt` with the ones Kalapa gives you. R8 needs no extra rules: the SDK ships
 its own. The manifest needs no `INTERNET` permission or activity declaration: `ads-ui-view` merges them.
 
+### In a Views/XML app
+
+Steps 1 to 3 and 5 are the same. Only step 4 differs: declare the view in the layout and give it the controller. The view
+stays `GONE` until its ad is ready, so a margin on it takes no space while there is nothing to show.
+
+```xml
+<vn.kalapa.ads.adsui.banner.BannerAdView
+    android:id="@+id/banner_ad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/kalapa_ads_ad_margin" />
+```
+
+```kotlin
+// The controller comes from the session your ViewModel owns, as in AdsViewModel.
+findViewById<BannerAdView>(R.id.banner_ad).setController(controller)
+```
+
+`NativeAdView` (`vn.kalapa.ads.adsui.nativead`) is declared the same way. Each view draws only its own kind of creative,
+so pick the one that matches `state.ad?.creative`, as `FeedScreen.kt` does. This sample runs on Compose and does not
+include a Views screen, so the XML above follows the SDK's own guide and is not exercised here.
+
 ## Package map (`vn.kalapa.ads.sample`)
 
 | Package | Content |
