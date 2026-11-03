@@ -3,11 +3,19 @@ package vn.kalapa.ads.sample.ui
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.outlined.List
@@ -24,7 +32,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import vn.kalapa.ads.sample.R
@@ -35,6 +46,7 @@ import vn.kalapa.ads.sample.ui.feed.FeedScreen
 import vn.kalapa.ads.sample.ui.navigation.FloatingNavigationLayout
 import vn.kalapa.ads.sample.ui.navigation.SampleFloatingNavBar
 import vn.kalapa.ads.sample.ui.navigation.SampleNavItem
+import vn.kalapa.ads.sample.ui.navigation.SampleNavRail
 import vn.kalapa.ads.sample.ui.settings.SettingsScreen
 import vn.kalapa.ads.sample.ui.theme.SampleDimens
 import vn.kalapa.ads.sample.ui.theme.SampleSpacing
@@ -89,17 +101,7 @@ internal fun SampleApp(viewModel: AdsViewModel = viewModel()) {
 
     // Each tab keeps its own saved state (scroll position), so leaving a tab and coming back finds it as it was.
     val savedScreens = rememberSaveableStateHolder()
-    FloatingNavigationLayout(
-        modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding(),
-        navigation = {
-            SampleFloatingNavBar(
-                items,
-                Modifier.navigationBarsPadding()
-                    .padding(horizontal = SampleSpacing.Two, vertical = SampleSpacing.One)
-                    .widthIn(max = SampleDimens.maxNavBarWidth),
-            )
-        },
-    ) { content ->
+    val screen: @Composable (Modifier) -> Unit = { content ->
         savedScreens.SaveableStateProvider(tab.name) {
             when (tab) {
                 Tab.FEED -> Column(content) {
@@ -131,4 +133,35 @@ internal fun SampleApp(viewModel: AdsViewModel = viewModel()) {
             }
         }
     }
+
+    // Material's compact height (a phone held sideways): a rail at the start edge leaves the height to the content.
+    val windowHeight = with(LocalDensity.current) { LocalWindowInfo.current.containerSize.height.toDp() }
+    if (windowHeight < COMPACT_HEIGHT) {
+        Row(
+            Modifier.fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .windowInsetsPadding(
+                    WindowInsets.systemBars.union(WindowInsets.displayCutout)
+                        .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Vertical),
+                ),
+        ) {
+            SampleNavRail(items)
+            screen(Modifier.weight(1f))
+        }
+    } else {
+        FloatingNavigationLayout(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding(),
+            navigation = {
+                SampleFloatingNavBar(
+                    items,
+                    Modifier.navigationBarsPadding()
+                        .padding(horizontal = SampleSpacing.Two, vertical = SampleSpacing.One)
+                        .widthIn(max = SampleDimens.maxNavBarWidth),
+                )
+            },
+            content = screen,
+        )
+    }
 }
+
+private val COMPACT_HEIGHT = 480.dp

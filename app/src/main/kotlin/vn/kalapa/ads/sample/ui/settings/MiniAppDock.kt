@@ -1,11 +1,13 @@
 package vn.kalapa.ads.sample.ui.settings
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import vn.kalapa.ads.sample.R
 import vn.kalapa.ads.sample.ui.theme.SampleSizes
 import vn.kalapa.ads.sample.ui.theme.SampleSpacing
@@ -33,34 +36,50 @@ internal const val MINI_APP_UAT_URL = "https://uat.moneyiq.vn/mini-app?creative_
 @Composable
 internal fun MiniAppDock(enabled: Boolean, onOpen: (url: String?) -> Unit) {
     var production by rememberSaveable { mutableStateOf(false) }
-    Surface(tonalElevation = SampleSpacing.Half) {
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = SampleSpacing.Two, vertical = SampleSpacing.One),
-            verticalArrangement = Arrangement.spacedBy(SampleSpacing.One),
+    val switchLabel: @Composable (Modifier) -> Unit = { modifier ->
+        Column(modifier) {
+            Text(stringResource(R.string.mini_app_production_switch), style = MaterialTheme.typography.bodyLarge)
+            Text(
+                stringResource(R.string.mini_app_production_warning),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error,
+            )
+        }
+    }
+    val openButton: @Composable (Modifier) -> Unit = { modifier ->
+        Button(
+            modifier = modifier.heightIn(min = SampleSizes.MinTouchTarget),
+            enabled = enabled,
+            onClick = { onOpen(if (production) null else MINI_APP_UAT_URL) },
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        stringResource(R.string.mini_app_production_switch),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    Text(
-                        stringResource(R.string.mini_app_production_warning),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error,
-                    )
+            Text(stringResource(if (production) R.string.mini_app_open_production else R.string.mini_app_open))
+        }
+    }
+    Surface(tonalElevation = SampleSpacing.Half) {
+        BoxWithConstraints(Modifier.fillMaxWidth().padding(horizontal = SampleSpacing.Two, vertical = SampleSpacing.One)) {
+            if (maxWidth >= WIDE_DOCK) {
+                // Wide enough (a phone held sideways, a tablet): one row leaves the height to the form above.
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(SampleSpacing.Two),
+                ) {
+                    switchLabel(Modifier.weight(1f))
+                    Switch(checked = production, onCheckedChange = { production = it })
+                    openButton(Modifier.widthIn(min = OPEN_BUTTON_MIN_WIDTH))
                 }
-                Switch(checked = production, onCheckedChange = { production = it })
-            }
-            Button(
-                modifier = Modifier.fillMaxWidth().heightIn(min = SampleSizes.MinTouchTarget),
-                enabled = enabled,
-                onClick = { onOpen(if (production) null else MINI_APP_UAT_URL) },
-            ) {
-                Text(
-                    stringResource(if (production) R.string.mini_app_open_production else R.string.mini_app_open),
-                )
+            } else {
+                Column(verticalArrangement = Arrangement.spacedBy(SampleSpacing.One)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        switchLabel(Modifier.weight(1f))
+                        Switch(checked = production, onCheckedChange = { production = it })
+                    }
+                    openButton(Modifier.fillMaxWidth())
+                }
             }
         }
     }
 }
+
+/** The dock's content width (inside its padding) from which the switch and the button share one row. */
+private val WIDE_DOCK = 600.dp
+private val OPEN_BUTTON_MIN_WIDTH = 200.dp
