@@ -1,0 +1,43 @@
+{
+  "ad_type": "native",
+  "ad_unit_id": "be9abee4-ed55-4557-b9d4-a70ecbc1c6de",
+  "ads": [
+    {
+      "ad_type": "native",
+      "content": {
+        "bullets": [
+          "Xem trước lãi suất và kỳ hạn phù hợp",
+          "Biết trước số tiền phải trả mỗi tháng",
+          "Từ đối tác tài chính được cấp phép"
+        ],
+        "cta": "Xem chi tiết vay",
+        "footnote": "Kết quả mang tính tham khảo",
+        "size": {
+          "height": 250,
+          "width": 320
+        },
+        "subtitle": "Minh bạch, bảo mật, không ràng buộc",
+        "tag": "THAM KHẢO",
+        "theme": {
+          "primary": "#1E4BD8",
+          "soft": "#E8EFFF"
+        },
+        "title": "Vay tiêu dùng trả góp"
+      },
+      "content_html": null,
+      "display_duration": 30,
+      "id": "00000000-0000-4000-8000-0000000000a3",
+      "image_url": null,
+      "persona_id": "P1",
+      "size": "320x250",
+      "target_url": "https://uat.moneyiq.vn/mini-app?creative_id=P1-C&persona_id=P1&placement={placement}",
+      "template": "product_card",
+      "theme": {
+        "primary": "#1E4BD8",
+        "soft": "#E8EFFF"
+      },
+      "title": "Khoản vay tiêu dùng"
+    }
+  ],
+  "count": 1
+}

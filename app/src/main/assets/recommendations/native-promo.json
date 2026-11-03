@@ -1,0 +1,43 @@
+{
+  "ad_type": "native",
+  "ad_unit_id": "be9abee4-ed55-4557-b9d4-a70ecbc1c6de",
+  "ads": [
+    {
+      "ad_type": "native",
+      "content": {
+        "captions": [
+          "Khoản vay nhỏ cho chi tiêu",
+          "Lãi suất hiển thị rõ trước khi đồng ý"
+        ],
+        "cta": "Xem chi tiết",
+        "footnote": "Kết quả mang tính tham khảo",
+        "headline": "Trả theo tháng\nbiết trước số tiền",
+        "label": "Khoản vay nhỏ",
+        "partner_text": "Đối tác tài chính được cấp phép",
+        "size": {
+          "height": 250,
+          "width": 320
+        },
+        "theme": {
+          "primary": "#E8850C",
+          "soft": "#FFF2DF"
+        },
+        "visual": "bars"
+      },
+      "content_html": null,
+      "display_duration": 30,
+      "id": "e440798c-ff76-4990-9d52-f3a974b0481e",
+      "image_url": null,
+      "persona_id": "P5",
+      "size": "320x250",
+      "target_url": "https://uat.moneyiq.vn/mini-app?creative_id=P5-A&persona_id=P5&placement={placement}",
+      "template": "promo_card",
+      "theme": {
+        "primary": "#E8850C",
+        "soft": "#FFF2DF"
+      },
+      "title": "Trả theo tháng biết trước số tiền"
+    }
+  ],
+  "count": 1
+}

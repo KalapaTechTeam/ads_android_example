@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_feed">Feed</string>
+    <string name="tab_settings">Settings</string>
+    <string name="settings_mini_app_profile">Mini-app profile</string>
+    <string name="profile_full_name">Full name</string>
+    <string name="profile_phone_number">Phone number</string>
+    <string name="profile_user_id">Identity number</string>
+    <string name="profile_amount">Amount</string>
+    <string name="profile_period">Loan term in months (6 or 12)</string>
+    <string name="profile_amount_error">Enter a whole number from 0 to 9223372036854775807.</string>
+    <string name="profile_save">Save</string>
+    <string name="profile_apply">Apply</string>
+    <string name="profile_clear">Clear</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_follow_device">Follow device</string>
+    <string name="settings_unsupported">This Android version cannot set the language per app; the app follows the device language.</string>
+    <string name="language_vietnamese" translatable="false">Tiếng Việt</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="mini_app_open">Open mini-app</string>
+    <string name="mini_app_open_production">Open mini-app (production)</string>
+    <string name="mini_app_production_switch">Default URL (production)</string>
+    <string name="mini_app_production_warning">Off opens UAT. On opens production, which may create real leads.</string>
+    <string name="tab_events">SDK events</string>
+    <string name="live">Live</string>
+    <string name="scenario">Offline scenario</string>
+    <string name="reload">Reload</string>
+    <string name="scenario_banner">Banner</string>
+    <string name="scenario_first_invalid">First ad is broken</string>
+    <string name="scenario_no_fill">No ad available</string>
+    <string name="scenario_all_invalid">Every ad is broken</string>
+    <string name="scenario_malformed">Garbled response</string>
+    <string name="scenario_server_error">Server error (503)</string>
+    <string name="scenario_network_error">No network</string>
+    <string name="scenario_slow">Slow reply (5 s)</string>
+    <string name="scenario_native_strip">Strip (small bar)</string>
+    <string name="scenario_native_promo">Promo card</string>
+    <string name="scenario_native_product">Product card</string>
+    <string name="scenario_long_strip">Strip, longest text</string>
+    <string name="scenario_long_promo">Promo card, longest text</string>
+    <string name="scenario_long_product">Product card, longest text</string>
+    <string name="group_normal">Normal ads</string>
+    <string name="group_bad_data">Bad data</string>
+    <string name="group_network">Network problems</string>
+    <string name="group_longest_text">Longest text</string>
+    <string name="hint_banner">Shows one HTML banner</string>
+    <string name="hint_native_strip">Small native bar, 320×80</string>
+    <string name="hint_native_promo">Native card with a banner on top, 320×250</string>
+    <string name="hint_native_product">Native card with three benefits, 320×250</string>
+    <string name="hint_first_invalid">The SDK skips it and shows the next ad</string>
+    <string name="hint_no_fill">The slot stays empty (NO_FILL)</string>
+    <string name="hint_all_invalid">The slot stays empty (NO_VALID_CREATIVE)</string>
+    <string name="hint_malformed">The slot stays empty, parse error</string>
+    <string name="hint_server_error">The slot stays empty, load error</string>
+    <string name="hint_network_error">The slot stays empty, load error</string>
+    <string name="hint_slow">Shows loading first, then the ad</string>
+    <string name="hint_long_text">Longest text allowed: it must fit the frame</string>
+    <string name="post_title">Post %1$d</string>
+    <string name="post_body">Sample content so the banner can scroll in and out of view.</string>
+    <string name="slot_status">%1$s · %2$s</string>
+    <string name="slot_empty">No ad: %1$s</string>
+    <string name="events_clear">Clear</string>
+    <plurals name="events_count">
+        <item quantity="one">%1$d event</item>
+        <item quantity="other">%1$d events</item>
+    </plurals>
+    <string name="events_empty">No events yet. Load an ad, scroll it into view, then tap it.</string>
+</resources>

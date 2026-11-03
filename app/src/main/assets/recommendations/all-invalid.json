@@ -1,0 +1,8 @@
+{
+  "ad_type": "banner",
+  "ad_unit_id": "unit-1",
+  "ads": [
+    { "id": "bad-1", "content_url": "/api/content/ad/bad-1" },
+    { "id": 7, "content_url": "/api/content/ad/bad-2", "target_url": "https://uat.vcredit.vn/fec-miniapp" }
+  ]
+}

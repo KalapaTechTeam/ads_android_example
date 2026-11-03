@@ -1,0 +1,27 @@
+{
+  "ad_type": "native",
+  "ad_unit_id": "be9abee4-ed55-4557-b9d4-a70ecbc1c6de",
+  "ads": [
+    {
+      "id": "00000000-0000-4000-8000-0000000000a1",
+      "template": "strip",
+      "persona_id": "P1",
+      "target_url": "https://uat.moneyiq.vn/mini-app?creative_id=P1-B&persona_id=P1&placement={placement}",
+      "display_duration": 30,
+      "content": {
+        "size": {
+          "width": 320,
+          "height": 80
+        },
+        "theme": {
+          "primary": "#1E4BD8",
+          "soft": "#E8EFFF"
+        },
+        "title": "Xem hạn mức vay phù hợp chỉ với vài bước",
+        "body": "Chưa cần nộp hồ sơ, kết quả mang tính tham khảo cho bạn",
+        "cta": "Kiểm tra hạn mức"
+      }
+    }
+  ],
+  "count": 1
+}

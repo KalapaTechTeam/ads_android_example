@@ -1,0 +1,43 @@
+{
+  "ad_type": "native",
+  "ad_unit_id": "be9abee4-ed55-4557-b9d4-a70ecbc1c6de",
+  "ads": [
+    {
+      "ad_type": "native",
+      "content": {
+        "captions": [
+          "Vay tiêu dùng từ đối tác được cấp phép",
+          "Kiểm tra trực tuyến, kết quả chỉ tham khảo"
+        ],
+        "cta": "Xem hạn mức vay",
+        "footnote": "Kết quả mang tính tham khảo",
+        "headline": "Thông tin minh bạch\ntrước khi quyết định",
+        "label": "Vay tiêu dùng cá nhân",
+        "partner_text": "Đối tác tài chính được cấp phép",
+        "size": {
+          "height": 250,
+          "width": 320
+        },
+        "theme": {
+          "primary": "#E8850C",
+          "soft": "#FFF2DF"
+        },
+        "visual": "bars"
+      },
+      "content_html": null,
+      "display_duration": 30,
+      "id": "00000000-0000-4000-8000-0000000000a2",
+      "image_url": null,
+      "persona_id": "P5",
+      "size": "320x250",
+      "target_url": "https://uat.moneyiq.vn/mini-app?creative_id=P5-A&persona_id=P5&placement={placement}",
+      "template": "promo_card",
+      "theme": {
+        "primary": "#E8850C",
+        "soft": "#FFF2DF"
+      },
+      "title": "Trả theo tháng biết trước số tiền"
+    }
+  ],
+  "count": 1
+}
