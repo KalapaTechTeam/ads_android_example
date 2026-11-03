@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Adaptive-icon foreground: a white ad card with two text bars cut out of it, inside the central 66dp safe zone. The
+    bars are holes, not a second colour, so the same shape also works as the themed (monochrome) icon.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M30,36 H78 A6,6 0 0 1 84,42 V66 A6,6 0 0 1 78,72 H30 A6,6 0 0 1 24,66 V42 A6,6 0 0 1 30,36 Z M34,46 H74 V50 H34 Z M34,56 H64 V60 H34 Z" />
+</vector>

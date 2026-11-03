@@ -30,4 +30,6 @@
     <color name="sample_color_on_error_light">#FFFFFFFF</color>
     <color name="sample_color_error_container_light">#FFF9DEDC</color>
     <color name="sample_color_on_error_container_light">#FF410E0B</color>
+
+    <color name="ic_launcher_background">#FF1A237E</color>
 </resources>

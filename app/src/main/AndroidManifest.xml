@@ -12,7 +12,7 @@
         android:label="Kalapa Ads Sample"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sample"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         tools:targetApi="33">
 
         <activity
